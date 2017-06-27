@@ -18,17 +18,41 @@ var FavoritosListComponent = (function () {
         this.loading = true;
     }
     FavoritosListComponent.prototype.ngOnInit = function () {
+        this.getFavoritos();
+    };
+    FavoritosListComponent.prototype.getFavoritos = function () {
         var _this = this;
-        this._favoritoService.getFavoritos().subscribe(function (result) {
+        this._favoritoService.getFavoritos().subscribe(function (response) {
             // console.log('FavoritoListComponent cargado :-)');
             // console.log(result);
-            _this.favoritos = result.favoritos;
+            _this.favoritos = response.favoritos;
             if (!_this.favoritos) {
                 alert('Error en el servidor');
             }
             else {
                 _this.loading = false;
             }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log("Error: " + _this.errorMessage);
+                alert('Error en la petición');
+            }
+        });
+    };
+    FavoritosListComponent.prototype.onBorrarConfirm = function (id) {
+        this.confirmado = id;
+    };
+    FavoritosListComponent.prototype.onCancelarConfirm = function (id) {
+        this.confirmado = null;
+    };
+    FavoritosListComponent.prototype.onBorrarFavorito = function (id) {
+        var _this = this;
+        this._favoritoService.deleteFavorito(id).subscribe(function (response) {
+            if (!response.message) {
+                alert('Error en la petición!!');
+            }
+            _this.getFavoritos();
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {

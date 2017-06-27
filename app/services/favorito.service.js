@@ -36,6 +36,9 @@ var FavoritoService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.put(this.url + "favorito/" + id, params, { headers: headers }).map(function (res) { return res.json(); });
     };
+    FavoritoService.prototype.deleteFavorito = function (id) {
+        return this._http.delete(this.url + "favorito/" + id).map(function (res) { return res.json(); });
+    };
     return FavoritoService;
 }());
 FavoritoService = __decorate([

@@ -37,5 +37,9 @@ export class FavoritoService{
 
 		return this._http.put(`${this.url}favorito/${id}`, params, {headers: headers}).map((res) => res.json());
 	}
+
+	deleteFavorito(id: string){
+		return this._http.delete(`${this.url}favorito/${id}`).map((res) => res.json());
+	}
 }
 

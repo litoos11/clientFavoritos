@@ -1,0 +1,20 @@
+<header>
+	<img src="../assets/img/keep.png" alt="keep" id="logo">		
+
+	<div class="title-subtitle">
+		<h1><a [routerLink]="['/']">{{title}}</a></h1>
+		<P>{{description}}</P>		
+	</div>
+	<a class="btn-add-favorito" [routerLink]="['/crear-marcador']">
+		Crear marcador
+	</a>
+
+	<div class="clearfix"></div>	
+</header>
+
+<section class="main">
+	<!-- MOSTRAMOS OTROS COMPONENTES -->
+	<!-- <favoritos-list></favoritos-list>	 -->
+	<router-outlet></router-outlet>
+	<div class="clearfix"></div>	
+</section>
